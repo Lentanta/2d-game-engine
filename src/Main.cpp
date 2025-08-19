@@ -2,18 +2,24 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
-#include <glm/glm.hpp>
+#include "Game.h"
+// #include <glm/glm.hpp>
+// #include <sol/sol.hpp>
 
-#include <sol/sol.hpp>
+int main(int argc, char *argv[]) {
+  // sol::state lua;
+  // lua.open_libraries(sol::lib::base);
+  // SDL_Init(SDL_INIT_EVERYTHING);
 
-int main() {
-    sol::state lua;
-    lua.open_libraries(sol::lib::base);
-    SDL_Init(SDL_INIT_EVERYTHING);
+  // std::cout << "Hello, world!" << std::endl;
 
-    std::cout << "Hello, world!" << std::endl;
-    return 0;
+  Game game;
+
+  game.Initialize();
+  game.Run();
+
+  return 0;
 }
