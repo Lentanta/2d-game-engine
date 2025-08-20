@@ -1,14 +1,24 @@
-build:
-	g++ -Wall -std=c++17 src/*.cpp -I"./libs/" -lSDL2 -llua -o game-engine
+# -Wall for show warning
+CPPFLAGS := -Wall -std=c++17
+SOURCES := src/*.cpp
+OUTPUT_FILE := game-engine
 
-	# -Wall for show warning
-	# -lSDL2 for linking SDL2
-	# -"./libs/" is linking everthing in libs folder
+# Linking everthing in libs folder
+LIBS_LINK := -I"./libs/" 
+
+# Linking all SDL2
+SDL_LINK := -lSDL2 -lSDL2_image
+
+# Linking Lua script
+LUA_LINK := -llua
+
+build:
+	g++ ${CPPFLAGS} ${SOURCES} ${LIBS_LINK} ${SDL_LINK} ${LUA_LINK} -o ${OUTPUT_FILE} 
 
 run:
 	./game-engine
 
-clean: 
+clean:
 	rm ./game-engine
 
 
