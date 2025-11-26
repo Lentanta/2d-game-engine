@@ -1,15 +1,15 @@
+#include <iostream>
+
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_keycode.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
-#include <cstdint>
-#include <iostream>
 
 #include "Game.h"
-#include <SDL2/SDL.h>
-#include <ostream>
+#include <glm/glm.hpp>
 
 // Implement constructor
 Game::Game() {
@@ -55,6 +55,7 @@ void Game::Initialize() {
       window,                    //
       defaultConfig,             //
       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
   if (!renderer) {
     std::cerr << "Error creating SDL renderer" << std::endl;
     return;
@@ -87,15 +88,25 @@ void Game::ProcessInput() {
   }
 }
 
-void Game::Setup() {}
+glm::vec2 playerPosition;
+glm::vec2 playerVelocity;
 
-void Game::Update() {}
+void Game::Setup() {
+  playerPosition = glm::vec2(10.0, 10.0);
+  playerVelocity = glm::vec2(1.0, 1.0);
+}
+
+void Game::Update() {
+  playerPosition.x += playerVelocity.x;
+  playerPosition.y += playerVelocity.y;
+}
 
 void Game::Render() {
+  // Adding a blue background
   SDL_SetRenderDrawColor(renderer, 100, 149, 237, 255);
   SDL_RenderClear(renderer);
 
-  // TODO: render game objects
+  // Adding a white box
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   SDL_Rect rect = {10, 10, 50, 50};
   SDL_RenderFillRect(renderer, &rect);
@@ -106,7 +117,8 @@ void Game::Render() {
   SDL_FreeSurface(surface);
 
   // Postion of the texture/image is display (x, y, w, h);
-  SDL_Rect dstrect = {10, 10, 32, 32};
+  SDL_Rect dstrect = {static_cast<int>(playerPosition.x),
+                      static_cast<int>(playerPosition.y), 32, 32};
 
   // NULL is for portial of the texture image (Ex: 32x32 in a large image)
   SDL_RenderCopy(renderer, texture, NULL, &dstrect);
@@ -117,6 +129,7 @@ void Game::Render() {
 }
 
 void Game::Run() {
+  // Main game loop
   while (isRunning) {
     ProcessInput();
     Update();

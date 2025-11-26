@@ -1,0 +1,32 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-std=c++17",
+      "-I./libs",
+      "-o",
+      "game-engine",
+      "src/Game.cpp"
+    ],
+    "directory": "/home/lentanta/Documents/cpp-projects/2d-game-engine",
+    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Game.cpp",
+    "output": "/home/lentanta/Documents/cpp-projects/2d-game-engine/game-engine"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-std=c++17",
+      "-I./libs",
+      "-o",
+      "game-engine",
+      "src/Main.cpp"
+    ],
+    "directory": "/home/lentanta/Documents/cpp-projects/2d-game-engine",
+    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Main.cpp",
+    "output": "/home/lentanta/Documents/cpp-projects/2d-game-engine/game-engine"
+  }
+]
