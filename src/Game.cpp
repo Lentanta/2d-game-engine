@@ -1,3 +1,4 @@
+#include <SDL2/SDL_timer.h>
 #include <iostream>
 
 #include <SDL2/SDL.h>
@@ -9,12 +10,13 @@
 #include <SDL2/SDL_video.h>
 
 #include "Game.h"
+#include "Logger.h"
 #include <glm/glm.hpp>
 
 // Implement constructor
 Game::Game() {
   isRunning = false;
-  std::cout << "Game constructor called" << std::endl;
+  Logger::Log("Game constructor called");
 }
 
 Game::~Game() {
@@ -66,7 +68,7 @@ void Game::Initialize() {
   SDL_RenderSetLogicalSize(renderer, windowWidth, windowHeight);
 
   // When everything succesfull
-  std::cout << "SDL Init everything succesfull" << std::endl;
+  Logger::Log("SDL Init everything succesfull");
   isRunning = true;
 }
 
@@ -80,8 +82,10 @@ void Game::ProcessInput() {
       break;
 
     case SDL_KEYDOWN:
-      if (sdlEvent.key.keysym.sym == SDLK_ESCAPE) {
+      if (sdlEvent.key.keysym.sym == SDLK_ESCAPE ||
+          sdlEvent.key.keysym.sym == SDLK_q) {
         isRunning = false;
+        Logger::Err("Force quit");
       };
       break;
     }
@@ -93,12 +97,23 @@ glm::vec2 playerVelocity;
 
 void Game::Setup() {
   playerPosition = glm::vec2(10.0, 10.0);
-  playerVelocity = glm::vec2(1.0, 1.0);
+  playerVelocity = glm::vec2(10, 5);
 }
 
 void Game::Update() {
-  playerPosition.x += playerVelocity.x;
-  playerPosition.y += playerVelocity.y;
+  // If the PC is too fast then it have to wait by lock it in a while loop
+  int delayTime = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPrevFrame);
+  if (delayTime > 0 && delayTime < MILLISECS_PER_FRAME) {
+    SDL_Delay(delayTime);
+  };
+
+  // delta time, divided by 1000 to convert millisec to sec
+  double dt = (SDL_GetTicks() - millisecsPrevFrame) / 1000.0f;
+
+  millisecsPrevFrame = SDL_GetTicks();
+
+  playerPosition.x += playerVelocity.x * dt;
+  playerPosition.y += playerVelocity.y * dt;
 }
 
 void Game::Render() {
@@ -129,6 +144,8 @@ void Game::Render() {
 }
 
 void Game::Run() {
+  Setup();
+
   // Main game loop
   while (isRunning) {
     ProcessInput();
