@@ -1,20 +1,20 @@
 # Compiler and flags
 CXX := g++
-CXXFLAGS := -Wall -std=c++17 -I./libs
-
 # -Wall for show warning
-CPPFLAGS := -Wall -std=c++17
-SOURCES := src/*.cpp
-OUTPUT_FILE := game-engine
+CXXFLAGS := -Wall -std=c++17 
 
-# Linking all SDL2
-SDL_LINK := -lSDL2 -lSDL2_image
+INCLUDE_PATH := -I./libs
+SOURCE_FILES := src/*.cpp \
+								src/Game/*.cpp \
+								src/Logger/*.cpp
+OBJ_FILE := game-engine
 
-# Linking Lua script
+# Linking SDL2 and Lua script
+SDL_LINK := -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 LUA_LINK := -llua
 
 build:
-	${CXX} ${CXXFLAGS} ${SOURCES} ${SDL_LINK} ${LUA_LINK} -o ${OUTPUT_FILE} 
+	${CXX} ${CXXFLAGS} ${INCLUDE_PATH} ${SOURCE_FILES} ${SDL_LINK} ${LUA_LINK} -o ${OBJ_FILE} 
 
 run:
 	./game-engine

@@ -9,8 +9,8 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
 
+#include "../Logger/Logger.h"
 #include "Game.h"
-#include "Logger.h"
 #include <glm/glm.hpp>
 
 // Implement constructor
@@ -40,11 +40,13 @@ void Game::Initialize() {
   windowHeight = 600; // displayMode.h;
 
   // 2.Creating a window
-  window = SDL_CreateWindow(  //
-      "2D Game Engine",       //
-      SDL_WINDOWPOS_CENTERED, //
-      SDL_WINDOWPOS_CENTERED, //
-      windowWidth, windowHeight, SDL_WINDOW_BORDERLESS);
+  window = SDL_CreateWindow(     //
+      "2D Game Engine",          //
+      SDL_WINDOWPOS_CENTERED,    //
+      SDL_WINDOWPOS_CENTERED,    //
+      windowWidth, windowHeight, //
+      0);
+  // SDL_WINDOW_BORDERLESS);
 
   if (!window) {
     std::cerr << "Error creating SDL window" << std::endl;
@@ -64,7 +66,7 @@ void Game::Initialize() {
   }
 
   // 4.Set fullscreen and prevent from stretching the window
-  SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+  // SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
   SDL_RenderSetLogicalSize(renderer, windowWidth, windowHeight);
 
   // When everything succesfull

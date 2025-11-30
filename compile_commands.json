@@ -8,10 +8,10 @@
       "-I./libs",
       "-o",
       "game-engine",
-      "src/Game.cpp"
+      "src/Main.cpp"
     ],
     "directory": "/home/lentanta/Documents/cpp-projects/2d-game-engine",
-    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Game.cpp",
+    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Main.cpp",
     "output": "/home/lentanta/Documents/cpp-projects/2d-game-engine/game-engine"
   },
   {
@@ -23,10 +23,25 @@
       "-I./libs",
       "-o",
       "game-engine",
-      "src/Main.cpp"
+      "src/Game/Game.cpp"
     ],
     "directory": "/home/lentanta/Documents/cpp-projects/2d-game-engine",
-    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Main.cpp",
+    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Game/Game.cpp",
+    "output": "/home/lentanta/Documents/cpp-projects/2d-game-engine/game-engine"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-Wall",
+      "-std=c++17",
+      "-I./libs",
+      "-o",
+      "game-engine",
+      "src/Logger/Logger.cpp"
+    ],
+    "directory": "/home/lentanta/Documents/cpp-projects/2d-game-engine",
+    "file": "/home/lentanta/Documents/cpp-projects/2d-game-engine/src/Logger/Logger.cpp",
     "output": "/home/lentanta/Documents/cpp-projects/2d-game-engine/game-engine"
   }
 ]
